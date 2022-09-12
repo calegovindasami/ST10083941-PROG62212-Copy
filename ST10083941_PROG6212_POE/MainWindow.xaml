@@ -16,9 +16,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <Grid>
-            <uc:UserSignUp></uc:UserSignUp>
-            <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
-        </Grid>
+        <materialDesign:Transitioner SelectedIndex="0">
+            <Grid>
+                <uc:UserSignUp></uc:UserSignUp>
+                <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
+            </Grid>
+            <materialDesign:TransitionerSlide>
+                <StackPanel Background="{StaticResource PrimaryHueDarkBrush}"></StackPanel>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
     </Grid>
 </Window>
