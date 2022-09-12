@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="ST10083941_PROG6212_POE.UserControls.UserSignUp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="14"
+             FontFamily="{materialDesign:MaterialDesignFont}"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ST10083941_PROG6212_POE.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="550">
+    <Grid>
+        <Border BorderThickness="5" BorderBrush="{DynamicResource PrimaryHueMidBrush}">
+            <StackPanel HorizontalAlignment="Center">
+            <TextBlock Name="tblHeader" Foreground="{StaticResource PrimaryHueMidBrush}" Width="450" TextAlignment="Center" Style="{DynamicResource MaterialDesignHeadline3TextBlock}" FontWeight="Bold"  Margin="0 32 0 0" HorizontalAlignment="Center">CREATE ACCOUNT</TextBlock>
+            <TextBox Name="txbUsername" Margin="0 16 0 16" FontSize="20" VerticalContentAlignment="Center" Style="{DynamicResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.HelperText="Username" materialDesign:HintAssist.HelperTextFontSize="16" Width="350" Height="75"></TextBox>
+            <mah:NumericUpDown Name="nudNumberOfSemesterWeeks" VerticalContentAlignment="Center" Margin="0 16 0 16" Width="350" FontSize="20" materialDesign:HintAssist.HelperText="Number of Semester Weeks" materialDesign:HintAssist.HelperTextFontSize="16" TextAlignment="Left" Height="75"></mah:NumericUpDown>
+            <DatePicker Name="dpSemesterStartDate" VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="0 16 0 16" FontSize="20"  Width="350" Height="75" materialDesign:HintAssist.HelperText="Semester Start Date" materialDesign:HintAssist.HelperTextFontSize="16" />
+            <Button Margin="0 32 0 16" Width="250" Height="50" FontSize="32" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="25">SUBMIT</Button>
+        </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
