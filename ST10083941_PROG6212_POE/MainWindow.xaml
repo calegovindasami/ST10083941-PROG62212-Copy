@@ -1,6 +1,13 @@
 ﻿<Window x:Class="ST10083941_PROG6212_POE.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:uc="clr-namespace:ST10083941_PROG6212_POE.UserControls"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="14"
+             FontFamily="{materialDesign:MaterialDesignFont}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,6 +16,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <uc:UserSignUp></uc:UserSignUp>
+        <Grid>
+            <uc:UserSignUp></uc:UserSignUp>
+            <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
+        </Grid>
     </Grid>
 </Window>
