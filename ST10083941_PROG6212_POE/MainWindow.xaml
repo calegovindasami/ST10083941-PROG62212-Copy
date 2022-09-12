@@ -17,11 +17,18 @@
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
         <materialDesign:Transitioner SelectedIndex="0">
-            <Grid>
-                <uc:UserSignUp></uc:UserSignUp>
-                <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
+            <Grid Name="gdSignUp">
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
+                    <uc:UserSignUp x:Name="ucSignUp"></uc:UserSignUp>
+                </materialDesign:TransitioningContent>
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromTop,Duration=0:0:0.5}">
+                    <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
+                </materialDesign:TransitioningContent>
             </Grid>
             <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:SlideOutWipe/>
+                </materialDesign:TransitionerSlide.ForwardWipe>
                 <StackPanel Background="{StaticResource PrimaryHueDarkBrush}"></StackPanel>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
