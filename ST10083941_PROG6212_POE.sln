@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST10083941_PROG6212_POE", "ST10083941_PROG6212_POE\ST10083941_PROG6212_POE.csproj", "{513BA51B-0E7C-442A-81D0-CC4DCA2DC980}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeManagementLibrary", "TimeManagementLibrary\TimeManagementLibrary.csproj", "{B1EF573E-4329-41DC-9478-776C81DA9DCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{513BA51B-0E7C-442A-81D0-CC4DCA2DC980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513BA51B-0E7C-442A-81D0-CC4DCA2DC980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513BA51B-0E7C-442A-81D0-CC4DCA2DC980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513BA51B-0E7C-442A-81D0-CC4DCA2DC980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1EF573E-4329-41DC-9478-776C81DA9DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1EF573E-4329-41DC-9478-776C81DA9DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1EF573E-4329-41DC-9478-776C81DA9DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1EF573E-4329-41DC-9478-776C81DA9DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBDB3A1D-9F5D-49BF-8D85-E48EDCBA530C}
+	EndGlobalSection
+EndGlobal
