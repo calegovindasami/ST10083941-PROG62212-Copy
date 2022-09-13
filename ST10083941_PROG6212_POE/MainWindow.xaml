@@ -16,20 +16,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="0">
-            <Grid Name="gdSignUp">
-                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
-                    <uc:UserSignUp x:Name="ucSignUp"></uc:UserSignUp>
-                </materialDesign:TransitioningContent>
-                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromTop,Duration=0:0:0.5}">
-                    <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
-                </materialDesign:TransitioningContent>
-            </Grid>
+        <materialDesign:Transitioner SelectedIndex="1">
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.BackwardWipe>
+                    <materialDesign:SlideOutWipe></materialDesign:SlideOutWipe>
+                </materialDesign:TransitionerSlide.BackwardWipe>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:CircleWipe/>
+                </materialDesign:TransitionerSlide.ForwardWipe>
+                <Grid Name="gdSignUp">
+                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
+                        <uc:UserSignUp x:Name="ucSignUp"></uc:UserSignUp>
+                    </materialDesign:TransitioningContent>
+                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromTop,Duration=0:0:0.5}">
+                        <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
+                    </materialDesign:TransitioningContent>
+                </Grid>
+            </materialDesign:TransitionerSlide>
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide.ForwardWipe>
-                    <materialDesign:SlideOutWipe/>
+                    <materialDesign:CircleWipe/>
                 </materialDesign:TransitionerSlide.ForwardWipe>
-                <StackPanel Background="{StaticResource PrimaryHueDarkBrush}"></StackPanel>
+                <StackPanel Background="{StaticResource PrimaryHueMidBrush}"/>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
     </Grid>
