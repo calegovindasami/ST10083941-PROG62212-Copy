@@ -28,15 +28,15 @@
                 <TabControl>
                     <TabItem Header="Modules">
                         <StackPanel Orientation="Horizontal">
-                            <DataGrid Width="500" Margin="16" Height="450">
+                            <DataGrid  Width="550" Margin="16" Height="450">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Module Code"/>
-                                    <DataGridTextColumn Header="Module Name"/>
-                                    <DataGridTextColumn Header="Number of Credits"/>
-                                    <DataGridTextColumn Header="Weekly Class Hours"/>
+                                    <DataGridTextColumn Width="110" Header="Module Code"/>
+                                    <DataGridTextColumn Width="120" Header="Module Name"/>
+                                    <DataGridTextColumn Width="140" Header="Number of Credits"/>
+                                    <DataGridTextColumn Width="180" Header="Weekly Class Hours"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <uc:AddModule Width="450" VerticalAlignment="Center"/>
+                            <uc:AddModule Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Study Sessions"></TabItem>
