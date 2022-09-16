@@ -17,38 +17,31 @@
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
         <materialDesign:Transitioner SelectedIndex="1">
-            <materialDesign:TransitionerSlide>
-                <materialDesign:TransitionerSlide.BackwardWipe>
-                    <materialDesign:SlideOutWipe></materialDesign:SlideOutWipe>
-                </materialDesign:TransitionerSlide.BackwardWipe>
-                <materialDesign:TransitionerSlide.ForwardWipe>
-                    <materialDesign:CircleWipe/>
-                </materialDesign:TransitionerSlide.ForwardWipe>
-                <Grid Name="gdSignUp">
-                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
-                        <uc:UserSignUp x:Name="ucSignUp"></uc:UserSignUp>
-                    </materialDesign:TransitioningContent>
-                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromTop,Duration=0:0:0.5}">
-                        <materialDesign:PackIcon Width="256" Height="256" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" Kind="University"/>
-                    </materialDesign:TransitioningContent>
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <uc:UserSignUp/>
+                    <materialDesign:PackIcon Kind="GraduationCap" Width="256" Height="256" Foreground="{StaticResource PrimaryHueMidBrush}" Opacity="0.3" VerticalAlignment="Center" Margin="32"/>
                 </Grid>
             </materialDesign:TransitionerSlide>
+
             <materialDesign:TransitionerSlide>
-                <materialDesign:TransitionerSlide.ForwardWipe>
-                    <materialDesign:CircleWipe/>
-                </materialDesign:TransitionerSlide.ForwardWipe>
-                <Grid Background="{StaticResource PrimaryHueMidBrush}">
-                    <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" ToolTipService.Placement="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16" Height="64" Width="64" PlacementMode="RightAndAlignMiddles">
-                        <StackPanel>
-                            <Button FontSize="16" FontWeight="Bold" ToolTip="Add Module">M</Button>
-                            <Button FontSize="16" FontWeight="Bold" ToolTip="Add Study Session">S</Button>
+                <TabControl>
+                    <TabItem Header="Modules">
+                        <StackPanel Orientation="Horizontal">
+                            <DataGrid Width="500" Margin="16" Height="450">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Module Code"/>
+                                    <DataGridTextColumn Header="Module Name"/>
+                                    <DataGridTextColumn Header="Number of Credits"/>
+                                    <DataGridTextColumn Header="Weekly Class Hours"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <uc:AddModule Width="450" VerticalAlignment="Center"/>
                         </StackPanel>
-                    </materialDesign:PopupBox>
-                    <DataGrid Width="500" Height="300" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="16">
-                        
-                    </DataGrid>
-                   
-                </Grid>
+                    </TabItem>
+                    <TabItem Header="Study Sessions"></TabItem>
+                    <TabItem Header="Notes"></TabItem>
+                </TabControl>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
     </Grid>

@@ -23,12 +23,8 @@ namespace ST10083941_PROG6212_POE
         public MainWindow()
         {
             InitializeComponent();
-            ucSignUp.btnSubmit.Click += BtnSubmit_Click;
+
         }
 
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            gdSignUp.Visibility = Visibility.Collapsed;
-        }
     }
 }
