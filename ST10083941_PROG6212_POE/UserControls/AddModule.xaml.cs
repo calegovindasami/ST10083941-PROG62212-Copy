@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,6 +21,7 @@ namespace ST10083941_PROG6212_POE.UserControls
     /// </summary>
     public partial class AddModule : UserControl
     {
+        Regex regex = new Regex("[^a-zA-Z0-9]+");
         public string ModuleCode
         {
             get => txbModuleCode.Text;
@@ -43,6 +45,12 @@ namespace ST10083941_PROG6212_POE.UserControls
         public AddModule()
         {
             InitializeComponent();
+        }
+
+        //Only allows textbox input to allow alphanumeric characters.
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

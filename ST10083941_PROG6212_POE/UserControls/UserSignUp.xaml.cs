@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using TimeManagementLibrary;
 namespace ST10083941_PROG6212_POE.UserControls
 {
     /// <summary>
@@ -44,5 +44,17 @@ namespace ST10083941_PROG6212_POE.UserControls
         {
             InitializeComponent();
         }
+
+        //Limits characters entered to alphabets only.
+        private void txbUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key < Key.A || e.Key > Key.Z)
+            {
+                e.Handled = true;
+            }
+        }
+
+
+
     }
 }

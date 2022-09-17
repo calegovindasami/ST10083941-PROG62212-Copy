@@ -16,11 +16,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="0">
+        <materialDesign:Transitioner SelectedIndex="1">
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=ExpandIn}">
                 <Grid>
-                    <uc:UserSignUp/>
+                    <uc:UserSignUp x:Name="ucUser"/>
                     <materialDesign:PackIcon Kind="GraduationCap" Width="256" Height="256" Foreground="{StaticResource PrimaryHueMidBrush}" Opacity="0.3" VerticalAlignment="Center" Margin="32"/>
+                    <materialDesign:Snackbar  MessageQueue="{materialDesign:MessageQueue}" Height="50" Background="PaleVioletRed" Foreground="White" Name="userSnackbar"/>
                 </Grid>
             </materialDesign:TransitionerSlide>
 
@@ -29,17 +30,17 @@
                     <TabItem Header="Modules" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
-                                <DataGrid  Width="550" Margin="16" Height="450">
+                                <DataGrid ItemsSource="{Binding Modules}" IsReadOnly="True" Width="550" Margin="16" Height="450" Name="dgModules" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Width="110" Header="Module Code"/>
-                                        <DataGridTextColumn Width="120" Header="Module Name"/>
-                                        <DataGridTextColumn Width="140" Header="Number of Credits"/>
-                                        <DataGridTextColumn Width="180" Header="Weekly Class Hours"/>
+                                        <DataGridTextColumn Binding="{Binding ModuleCode}" Width="110" Header="Module Code"/>
+                                        <DataGridTextColumn Binding="{Binding ModuleName}" Width="120" Header="Module Name"/>
+                                        <DataGridTextColumn Binding="{Binding NumberOfCredits}" Width="140" Header="Number of Credits"/>
+                                        <DataGridTextColumn Binding="{Binding WeeklyClassHours}" Width="180" Header="Weekly Class Hours"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </materialDesign:TransitioningContent>
                             <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom,Duration=0:0:0.5}">
-                                <uc:AddModule Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <uc:AddModule x:Name="ucModules" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </materialDesign:TransitioningContent>
                         </StackPanel>
                     </TabItem>

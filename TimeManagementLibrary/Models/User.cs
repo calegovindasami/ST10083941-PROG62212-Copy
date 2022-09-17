@@ -18,5 +18,10 @@ namespace TimeManagementLibrary.Models
         public string Username{ get; set; }
         public int NumberOfSemesterWeeks { get; set; }
         public DateTime SemesterStartDate { get; set; }
+
+        public User()
+        {
+
+        }
     }
 }

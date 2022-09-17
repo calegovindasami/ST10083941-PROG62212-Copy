@@ -15,6 +15,13 @@ namespace TimeManagementLibrary
         public ObservableCollection<Module> Modules { get; set; }
         public ObservableCollection<StudySession> StudySessions { get; set; }
 
+        public Context()
+        {
+            User = new User();
+            Modules = new ObservableCollection<Module>();
+            StudySessions = new ObservableCollection<StudySession>();
+        }
+
         //Adds module to collection.
         public void AddModule(string moduleCode, string moduleName, int numberOfCredits, int weeklyClassHours)
         {
@@ -54,6 +61,13 @@ namespace TimeManagementLibrary
             double remainingSelfStudyHours = currentWeekStudySessions.Sum(s => s.NumberOfHours);
 
             return remainingSelfStudyHours;
+        }
+
+        public void SignUp(string username, int numberOfSemesterWeeks, DateTime semesterStartDate)
+        {
+            User.Username = username;
+            User.NumberOfSemesterWeeks = numberOfSemesterWeeks;
+            User.SemesterStartDate = semesterStartDate;
         }
 
 
