@@ -63,18 +63,19 @@
                             <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom,Duration=0:0:0.5}">
                                 <Grid>
                                     <StackPanel>
-                                        <DataGrid Width="450" Margin="16" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top"  ItemsSource="{Binding StudySessions}" AutoGenerateColumns="False">
+                                        <ComboBox></ComboBox>
+                                        <DataGrid Width="450"  HorizontalAlignment="Left" Name="dgSessions" Height="250" VerticalAlignment="Top"  ItemsSource="{Binding StudySessions}" AutoGenerateColumns="False" >
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="110" Header="Module Code" Binding="{Binding ModuleCode}"/>
                                                 <DataGridTextColumn Width="120" Header="Session Date"  Binding="{Binding SessionDate, StringFormat={}{0:dd/MM/yyyy}}"/>
                                                 <DataGridTextColumn Width="180" Header="Hours Studied" Binding="{Binding NumberOfHours}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
-                                        <DataGrid Margin="16" Height="200" Name="dgSessions">
+                                        <DataGrid Margin="16" Height="200" Name="dgStudyHours" AutoGenerateColumns="False" ItemsSource="{Binding SelfStudyHours}">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="Module Code"/>
-                                                <DataGridTextColumn Header="Required Study Hours" />
-                                                <DataGridTextColumn Header="Remaining Study Hours"/>
+                                                <DataGridTextColumn Header="Module Code" Binding="{Binding ModuleCode}"/>
+                                                <DataGridTextColumn Header="Required Study Hours" Binding="{Binding  WeeklySelfStudyHours}" />
+                                                <DataGridTextColumn Header="Remaining Study Hours" Binding="{Binding  RemainingWeeklyStudyHours}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </StackPanel>

@@ -33,7 +33,14 @@ namespace ST10083941_PROG6212_POE
             DataContext = Context;
             ucSessions.DataContext = Context;
             ucSessions.btnAddSession.Click += BtnAddSession_Click;
+            ucSessions.cmbModuleCode.SelectionChanged += CmbModuleCode_SelectionChanged;
+            Context.LoadSelfStudySessions();
 
+        }
+
+        private void CmbModuleCode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string moduleCode = ucSessions.ModuleCode;
         }
 
         private void BtnAddSession_Click(object sender, RoutedEventArgs e)
@@ -49,6 +56,7 @@ namespace ST10083941_PROG6212_POE
                 int numberOfHours = ucSessions.NumberOfHours;
 
                 Context.AddStudySession(moduleCode, sessionDate, numberOfHours);
+                Context.LoadSelfStudySessions();
 
                 ucSessions.cmbModuleCode.SelectedIndex = 0;
                 ucSessions.dpSessionDate.SelectedDate = null;
@@ -72,6 +80,7 @@ namespace ST10083941_PROG6212_POE
             {
                 Context.AddModule(moduleCode, moduleName, numberOfCredits, weeklyClassHours);
                 snackModulesSuccess.MessageQueue?.Enqueue("Module has been added.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+                Context.LoadSelfStudySessions();
             }
             else
             {
@@ -112,6 +121,7 @@ namespace ST10083941_PROG6212_POE
             else if (dgModules.SelectedIndex != -1)
             {
                 Context.UpdateModule(moduleToBeUpdated, moduleCode, moduleName, numberOfCredits, weeklyClassHours);
+                Context.LoadSelfStudySessions();
                 dgModules.Items.Refresh();
                 snackModulesSuccess.MessageQueue?.Enqueue("Module has been updated.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
@@ -153,5 +163,6 @@ namespace ST10083941_PROG6212_POE
             ucModules.ClearFields();
             snackModulesSuccess.MessageQueue?.Enqueue("Fields have been cleared.", null, null, null, false, true, TimeSpan.FromSeconds(3));
         }
+
     }
 }

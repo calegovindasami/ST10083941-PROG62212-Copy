@@ -15,9 +15,11 @@ namespace TimeManagementLibrary
         public ObservableCollection<Module> Modules { get; set; }
         public ObservableCollection<StudySession> StudySessions { get; set; }
 
+        public ObservableCollection<SelfStudyHours> SelfStudyHours { get; set; }
+
         public Context()
         {
-            User = new User();
+            User = new User("Cassper", 8, DateTime.Today.Date);
 
             //Temp values
             Modules = new ObservableCollection<Module>()
@@ -26,7 +28,12 @@ namespace TimeManagementLibrary
                 new Module("SOEN6222", "Software Engineering", 15, 6),
                 new Module("CLDV6212", "Cloud Development", 15, 4)
             };
-            StudySessions = new ObservableCollection<StudySession>();
+            StudySessions = new ObservableCollection<StudySession>()
+            {
+                new StudySession("PROG6212", DateTime.Today.Date, 2)
+            };
+
+            SelfStudyHours = new ObservableCollection<SelfStudyHours>();
         }
 
         //Adds module to collection.
@@ -64,10 +71,11 @@ namespace TimeManagementLibrary
             DateTime endOfWeek = startOfWeek.AddDays(6);
 
             //Returns study sessions that only occurred during the current week.
-            var currentWeekStudySessions = StudySessions.Where(s => s.SessionDate.Date >= startOfWeek.Date && s.SessionDate.Date <= endOfWeek.Date);
-            double remainingSelfStudyHours = currentWeekStudySessions.Sum(s => s.NumberOfHours);
+            var selectedModule = StudySessions.Where(s => s.ModuleCode == moduleCode);
+            var currentWeekStudySessions = selectedModule.Where(s => s.SessionDate.Date >= startOfWeek.Date && s.SessionDate.Date <= endOfWeek.Date);
+            double weekSelfStudyHours = currentWeekStudySessions.Sum(s => s.NumberOfHours);
 
-            return remainingSelfStudyHours;
+            return weekSelfStudyHours;
         }
 
         public void SignUp(string username, int numberOfSemesterWeeks, DateTime semesterStartDate)
@@ -106,6 +114,16 @@ namespace TimeManagementLibrary
             Modules.Remove(module);
         }
 
-
+        public void LoadSelfStudySessions()
+        {
+            SelfStudyHours.Clear();
+            foreach (Module mod in Modules)
+            {
+                double weeklyStudyHours = CalculateWeeklySelfStudyHours(mod.NumberOfCredits, mod.WeeklyClassHours, User.NumberOfSemesterWeeks);
+                double remainingWeeklyStudyHours = CalculateRemainingSelfStudyHours(weeklyStudyHours, mod.ModuleCode);
+                SelfStudyHours selfStudyHours = new SelfStudyHours(mod.ModuleCode, weeklyStudyHours, weeklyStudyHours - remainingWeeklyStudyHours);
+                SelfStudyHours.Add(selfStudyHours);
+            }
+        }
     }
 }
