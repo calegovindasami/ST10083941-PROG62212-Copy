@@ -22,16 +22,8 @@ namespace TimeManagementLibrary
             User = new User("Cassper", 8, DateTime.Today.Date);
 
             //Temp values
-            Modules = new ObservableCollection<Module>()
-            {
-                new Module("PROG6212", "Programming 2B", 15, 8),
-                new Module("SOEN6222", "Software Engineering", 15, 6),
-                new Module("CLDV6212", "Cloud Development", 15, 4)
-            };
-            StudySessions = new ObservableCollection<StudySession>()
-            {
-                new StudySession("PROG6212", DateTime.Today.Date, 2)
-            };
+            Modules = new ObservableCollection<Module>();
+            StudySessions = new ObservableCollection<StudySession>();
 
             SelfStudyHours = new ObservableCollection<SelfStudyHours>();
         }

@@ -16,7 +16,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="1">
+        <materialDesign:Transitioner SelectedIndex="0">
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=ExpandIn}">
                 <Grid>
                     <uc:UserSignUp x:Name="ucUser"/>
@@ -63,8 +63,7 @@
                             <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom,Duration=0:0:0.5}">
                                 <Grid>
                                     <StackPanel>
-                                        <ComboBox></ComboBox>
-                                        <DataGrid Width="450"  HorizontalAlignment="Left" Name="dgSessions" Height="250" VerticalAlignment="Top"  ItemsSource="{Binding StudySessions}" AutoGenerateColumns="False" >
+                                        <DataGrid Margin="16" Width="450"  HorizontalAlignment="Left" Name="dgSessions" Height="250" VerticalAlignment="Top"  ItemsSource="{Binding StudySessions}" AutoGenerateColumns="False" >
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="110" Header="Module Code" Binding="{Binding ModuleCode}"/>
                                                 <DataGridTextColumn Width="120" Header="Session Date"  Binding="{Binding SessionDate, StringFormat={}{0:dd/MM/yyyy}}"/>

@@ -35,6 +35,8 @@ namespace ST10083941_PROG6212_POE
             ucSessions.btnAddSession.Click += BtnAddSession_Click;
             ucSessions.cmbModuleCode.SelectionChanged += CmbModuleCode_SelectionChanged;
             Context.LoadSelfStudySessions();
+            ucUser.dpSemesterStartDate.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
+            ucUser.dpSemesterStartDate.DisplayDateEnd = new DateTime(DateTime.Now.Year, 12, 31);
 
         }
 
@@ -100,6 +102,8 @@ namespace ST10083941_PROG6212_POE
             {
                 Context.SignUp(ucUser.Username, ucUser.NumberOfSemesterWeeks, ucUser.SemesterStartDate.Value);
                 ucUser.btnSubmit.Command = MaterialDesignThemes.Wpf.Transitions.Transitioner.MoveNextCommand;
+                ucSessions.dpSessionDate.DisplayDateStart = Context.User.SemesterStartDate;
+                ucSessions.dpSessionDate.DisplayDateEnd = Context.User.SemesterStartDate.AddDays(Context.User.NumberOfSemesterWeeks * 7);
             }
         }
 
