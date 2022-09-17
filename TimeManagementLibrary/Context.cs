@@ -101,6 +101,11 @@ namespace TimeManagementLibrary
             return true;
         }
 
+        public void RemoveModule(Module module)
+        {
+            Modules.Remove(module);
+        }
+
 
     }
 }

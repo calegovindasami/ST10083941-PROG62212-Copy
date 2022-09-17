@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,12 +41,18 @@ namespace ST10083941_PROG6212_POE
             int numberOfCredits = ucModules.NumberOfCredits;
             int weeklyClassHours = ucModules.WeeklyClassHours;
 
-            if (!Context.FoundModuleCode(moduleCode))
+
+            if (moduleName == "" && moduleName == "")
+            {
+                snackModules.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
+            else if (!Context.FoundModuleCode(moduleCode))
             {
                 Context.AddModule(moduleCode, moduleName, numberOfCredits, weeklyClassHours);
+                snackModulesSuccess.MessageQueue?.Enqueue("Module has been added.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
             else
-            { //<materialDesign:Snackbar Name="snackModules" MessageQueue="{materialDesign:MessageQueue}" />
+            {
                 snackModules.MessageQueue?.Enqueue("Module already exists.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
         }
@@ -72,9 +79,25 @@ namespace ST10083941_PROG6212_POE
             string moduleName = ucModules.ModuleName;
             int numberOfCredits = ucModules.NumberOfCredits;
             int weeklyClassHours = ucModules.WeeklyClassHours;
-            var moduleToBeUpdated = dgModules.SelectedItem;
-            Context.UpdateModule((Module)moduleToBeUpdated, moduleCode, moduleName, numberOfCredits, weeklyClassHours);
-            dgModules.Items.Refresh();
+            var moduleToBeUpdated = dgModules.SelectedItem as Module;
+            if (moduleCode == "" && moduleName == "")
+            {
+                snackModules.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
+            else if (moduleToBeUpdated.ModuleCode != moduleCode)
+            {
+                snackModules.MessageQueue?.Enqueue("Module already exists. Please select the correct module.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
+            else if (dgModules.SelectedIndex != -1)
+            {
+                Context.UpdateModule(moduleToBeUpdated, moduleCode, moduleName, numberOfCredits, weeklyClassHours);
+                dgModules.Items.Refresh();
+                snackModulesSuccess.MessageQueue?.Enqueue("Module has been updated.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
+            else
+            {
+                snackModules.MessageQueue?.Enqueue("Please select a module by double clicking on the module code.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
         }
 
         //Displays selected datagrid item value into the input fields for user to update.
@@ -85,6 +108,26 @@ namespace ST10083941_PROG6212_POE
             ucModules.txbModuleName.Text = module.ModuleName;
             ucModules.nudNumberOfCredits.Value = module.NumberOfCredits;
             ucModules.nudWeeklyClassHours.Value = module.WeeklyClassHours;
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgModules.SelectedIndex != -1)
+            {
+                Module module = dgModules.SelectedItem as Module;
+                Context.RemoveModule(module);
+                snackModulesSuccess.MessageQueue?.Enqueue("Module has been deleted.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
+            else
+            {
+                snackModules.MessageQueue?.Enqueue("Please select a module to delete by clicking on the module code.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            ucModules.ClearFields();
+            snackModulesSuccess.MessageQueue?.Enqueue("Fields have been cleared.", null, null, null, false, true, TimeSpan.FromSeconds(3));
         }
     }
 }

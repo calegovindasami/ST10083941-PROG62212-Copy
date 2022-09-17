@@ -52,5 +52,14 @@ namespace ST10083941_PROG6212_POE.UserControls
         {
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        public void ClearFields()
+        {
+            txbModuleCode.Text = "";
+            txbModuleName.Text = "";
+            nudNumberOfCredits.Value = 1;
+            nudWeeklyClassHours.Value = 1;
+            
+        }
     }
 }
