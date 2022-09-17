@@ -18,7 +18,14 @@ namespace TimeManagementLibrary
         public Context()
         {
             User = new User();
-            Modules = new ObservableCollection<Module>();
+
+            //Temp values
+            Modules = new ObservableCollection<Module>()
+            {
+                new Module("PROG6212", "Programming 2B", 15, 8),
+                new Module("SOEN6222", "Software Engineering", 15, 6),
+                new Module("CLDV6212", "Cloud Development", 15, 4)
+            };
             StudySessions = new ObservableCollection<StudySession>();
         }
 
@@ -68,6 +75,30 @@ namespace TimeManagementLibrary
             User.Username = username;
             User.NumberOfSemesterWeeks = numberOfSemesterWeeks;
             User.SemesterStartDate = semesterStartDate;
+        }
+
+        public void UpdateModule(Module module,string moduleCode, string moduleName, int numberOfCredits, int weeklyClassHours)
+        {
+            foreach (Module mod in Modules)
+            {
+                if (mod.ModuleCode == module.ModuleCode)
+                {
+                    mod.ModuleCode = moduleCode;
+                    mod.ModuleName = moduleName;
+                    mod.NumberOfCredits = numberOfCredits;
+                    mod.WeeklyClassHours = weeklyClassHours;
+                }
+            }
+        }
+
+        public bool FoundModuleCode(string moduleCode)
+        {
+            var foundMod = Modules.FirstOrDefault(m => m.ModuleCode == moduleCode);
+            if (foundMod == null)
+            {
+                return false;
+            }
+            return true;
         }
 
 

@@ -28,21 +28,28 @@
             <materialDesign:TransitionerSlide>
                 <TabControl SelectedIndex="0">
                     <TabItem Header="Modules" >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
-                                <DataGrid ItemsSource="{Binding Modules}" IsReadOnly="True" Width="550" Margin="16" Height="450" Name="dgModules" AutoGenerateColumns="False">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding ModuleCode}" Width="110" Header="Module Code"/>
-                                        <DataGridTextColumn Binding="{Binding ModuleName}" Width="120" Header="Module Name"/>
-                                        <DataGridTextColumn Binding="{Binding NumberOfCredits}" Width="140" Header="Number of Credits"/>
-                                        <DataGridTextColumn Binding="{Binding WeeklyClassHours}" Width="180" Header="Weekly Class Hours"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </materialDesign:TransitioningContent>
-                            <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom,Duration=0:0:0.5}">
-                                <uc:AddModule x:Name="ucModules" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </materialDesign:TransitioningContent>
-                        </StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
+                                    <StackPanel>
+                                        <DataGrid ItemsSource="{Binding Modules}" MouseDoubleClick="dgModules_MouseDoubleClick" IsReadOnly="True" Width="550" Margin="0 32 0 0" VerticalAlignment="Top" Height="350" Name="dgModules" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Binding="{Binding ModuleCode}" Width="110" Header="Module Code"/>
+                                                <DataGridTextColumn Binding="{Binding ModuleName}" Width="180" Header="Module Name"/>
+                                                <DataGridTextColumn Binding="{Binding NumberOfCredits}" Width="80" Header="Credits"/>
+                                                <DataGridTextColumn Binding="{Binding WeeklyClassHours}" Width="120" Header="Weekly Hours"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                        <Button HorizontalAlignment="Left" Margin="8" Width="150" Name="btnUpdate" Height="50" Click="btnUpdate_Click" FontSize="24" Style="{StaticResource MaterialDesignRaisedAccentButton}" materialDesign:ButtonAssist.CornerRadius="25">UPDATE</Button>
+                                    </StackPanel>
+                                </materialDesign:TransitioningContent>
+                                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom,Duration=0:0:0.5}">
+                                    <uc:AddModule x:Name="ucModules" Width="350" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </materialDesign:TransitioningContent>
+
+                            </StackPanel>
+                            <materialDesign:Snackbar Background="PaleVioletRed" Foreground="White" Name="snackModules" Height="50" MessageQueue="{materialDesign:MessageQueue}" />
+                        </Grid>
                     </TabItem>
                     <TabItem Header="Study Sessions">
                         <StackPanel Orientation="Horizontal">

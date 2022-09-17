@@ -20,5 +20,11 @@ namespace TimeManagementLibrary.Models
         public string ModuleName{ get; set; }
         public int NumberOfCredits { get; set; }
         public int WeeklyClassHours { get; set; }
+
+        public string GetCode()
+        {
+            return ModuleCode;
+        }
     }
+
 }
