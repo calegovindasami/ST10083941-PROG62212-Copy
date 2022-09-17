@@ -21,15 +21,14 @@ namespace ST10083941_PROG6212_POE.UserControls
     /// </summary>
     public partial class AddStudySession : UserControl
     {
-        ObservableCollection<string> ModuleCodes = new ObservableCollection<string>();
         public string ModuleCode 
         {
             get => cmbModuleCode.Text;
             private set => cmbModuleCode.Text = value; 
         }
-        public DateTime? SessionDate 
+        public DateTime SessionDate 
         { 
-            get => dpSessionDate.SelectedDate; 
+            get => dpSessionDate.SelectedDate.Value.Date; 
             set => dpSessionDate.SelectedDate = value; 
         }
         public int NumberOfHours 
@@ -42,11 +41,5 @@ namespace ST10083941_PROG6212_POE.UserControls
             InitializeComponent();
         }
 
-        public void LoadModules(ObservableCollection<string> moduleCodes)
-        {
-            ModuleCodes = moduleCodes;
-            cmbModuleCode.ItemsSource = ModuleCodes;
-            DataContext = this;
-        }
     }
 }

@@ -61,25 +61,28 @@
                     <TabItem Header="Study Sessions">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom,Duration=0:0:0.5}">
-                                <StackPanel>
-                                    <DataGrid Width="450" Margin="16" Height="250" VerticalAlignment="Top">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Width="110" Header="Module Code"/>
-                                            <DataGridTextColumn Width="120" Header="Session Date"/>
-                                            <DataGridTextColumn Width="180" Header="Hours Studied"/>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                    <DataGrid Margin="16" Height="200">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Module Code"/>
-                                            <DataGridTextColumn Header="Required Study Hours"/>
-                                            <DataGridTextColumn Header="Remaining Study Hours"/>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </StackPanel>
+                                <Grid>
+                                    <StackPanel>
+                                        <DataGrid Width="450" Margin="16" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top"  ItemsSource="{Binding StudySessions}" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Width="110" Header="Module Code" Binding="{Binding ModuleCode}"/>
+                                                <DataGridTextColumn Width="120" Header="Session Date"  Binding="{Binding SessionDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                                <DataGridTextColumn Width="180" Header="Hours Studied" Binding="{Binding NumberOfHours}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                        <DataGrid Margin="16" Height="200" Name="dgSessions">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Module Code"/>
+                                                <DataGridTextColumn Header="Required Study Hours" />
+                                                <DataGridTextColumn Header="Remaining Study Hours"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                    <materialDesign:Snackbar Name="snackSessions" Height="50" HorizontalAlignment="Left" Background="PaleVioletRed" Foreground="White" Margin="322,0,0,0" MessageQueue="{materialDesign:MessageQueue}"/>
+                                </Grid>
                             </materialDesign:TransitioningContent>
                             <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromRight,Duration=0:0:0.5}">
-                                <uc:AddStudySession Margin="0 16 0 0" Width="350" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <uc:AddStudySession x:Name="ucSessions" Margin="0 16 0 0" Width="350" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </materialDesign:TransitioningContent>
                         </StackPanel>
                     </TabItem>

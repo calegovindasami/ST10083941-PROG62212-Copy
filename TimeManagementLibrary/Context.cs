@@ -40,7 +40,7 @@ namespace TimeManagementLibrary
         public void AddStudySession(string moduleCode, DateTime sessionDate, int numberOfHours)
         {
             StudySession studySession = new StudySession(moduleCode, sessionDate, numberOfHours);
-            StudySessions.Add(studySession);
+             StudySessions.Add(studySession);
         }
 
         //Calculates the weekly self study hours required for a module and returns it.

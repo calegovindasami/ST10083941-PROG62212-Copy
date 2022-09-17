@@ -31,7 +31,29 @@ namespace ST10083941_PROG6212_POE
             ucUser.btnSubmit.Click += BtnSubmit_Click;
             ucModules.btnAddModule.Click += BtnAddModule_Click;
             DataContext = Context;
+            ucSessions.DataContext = Context;
+            ucSessions.btnAddSession.Click += BtnAddSession_Click;
 
+        }
+
+        private void BtnAddSession_Click(object sender, RoutedEventArgs e)
+        {
+            if (ucSessions.dpSessionDate.SelectedDate == null)
+            {
+                snackSessions.MessageQueue?.Enqueue("Please pick a date.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+            }
+            else
+            {
+                string moduleCode = ucSessions.ModuleCode;
+                DateTime sessionDate = ucSessions.SessionDate;
+                int numberOfHours = ucSessions.NumberOfHours;
+
+                Context.AddStudySession(moduleCode, sessionDate, numberOfHours);
+
+                ucSessions.cmbModuleCode.SelectedIndex = 0;
+                ucSessions.dpSessionDate.SelectedDate = null;
+                ucSessions.nudStudyHours.Value = 1;
+            }
         }
 
         private void BtnAddModule_Click(object sender, RoutedEventArgs e)
@@ -62,7 +84,6 @@ namespace ST10083941_PROG6212_POE
             //Prevents user from leaving fields empty.
             if (ucUser.Username == "" || ucUser.SemesterStartDate.ToString() == "")
             {
-                userSnackbar.IsActive = true;
                 userSnackbar.MessageQueue?.Enqueue("Values cannot be left empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
                 
             }
@@ -103,11 +124,14 @@ namespace ST10083941_PROG6212_POE
         //Displays selected datagrid item value into the input fields for user to update.
         private void dgModules_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Module module = dgModules.SelectedItem as Module;
-            ucModules.txbModuleCode.Text = module.ModuleCode;
-            ucModules.txbModuleName.Text = module.ModuleName;
-            ucModules.nudNumberOfCredits.Value = module.NumberOfCredits;
-            ucModules.nudWeeklyClassHours.Value = module.WeeklyClassHours;
+            if (dgModules.SelectedItem != null)
+            {
+                Module module = dgModules.SelectedItem as Module;
+                ucModules.txbModuleCode.Text = module.ModuleCode;
+                ucModules.txbModuleName.Text = module.ModuleName;
+                ucModules.nudNumberOfCredits.Value = module.NumberOfCredits;
+                ucModules.nudWeeklyClassHours.Value = module.WeeklyClassHours;
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
