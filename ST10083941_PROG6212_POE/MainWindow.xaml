@@ -32,7 +32,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
                                     <StackPanel>
-                                        <DataGrid ItemsSource="{Binding Modules}" MouseDoubleClick="dgModules_MouseDoubleClick" IsReadOnly="True" Width="550" Margin="0 32 0 0" VerticalAlignment="Top" Height="350" Name="dgModules" AutoGenerateColumns="False">
+                                        <DataGrid  AlternationCount="2" AlternatingRowBackground="LightGray" ItemsSource="{Binding Modules}" MouseDoubleClick="dgModules_MouseDoubleClick" IsReadOnly="True" Width="550" Margin="0 32 0 0" VerticalAlignment="Top" Height="350" Name="dgModules" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Binding="{Binding ModuleCode}" Width="110" Header="Module Code"/>
                                                 <DataGridTextColumn Binding="{Binding ModuleName}" Width="160" Header="Module Name"/>
@@ -63,14 +63,14 @@
                             <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom,Duration=0:0:0.5}">
                                 <Grid>
                                     <StackPanel>
-                                        <DataGrid Margin="16" Width="450"  HorizontalAlignment="Left" Name="dgSessions" Height="250" VerticalAlignment="Top"  ItemsSource="{Binding StudySessions}" AutoGenerateColumns="False" >
+                                        <DataGrid IsReadOnly="True" AlternationCount="2" AlternatingRowBackground="LightGray" Margin="16" Width="450"  HorizontalAlignment="Left" Name="dgSessions" Height="250" VerticalAlignment="Top"  ItemsSource="{Binding StudySessions}" AutoGenerateColumns="False" >
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="110" Header="Module Code" Binding="{Binding ModuleCode}"/>
                                                 <DataGridTextColumn Width="120" Header="Session Date"  Binding="{Binding SessionDate, StringFormat={}{0:dd/MM/yyyy}}"/>
                                                 <DataGridTextColumn Width="180" Header="Hours Studied" Binding="{Binding NumberOfHours}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
-                                        <DataGrid Margin="16" Height="200" Name="dgStudyHours" AutoGenerateColumns="False" ItemsSource="{Binding SelfStudyHours}">
+                                        <DataGrid  AlternationCount="2" AlternatingRowBackground="LightGray" IsReadOnly="True" Margin="16" Height="200" Name="dgStudyHours" AutoGenerateColumns="False" ItemsSource="{Binding SelfStudyHours}">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Module Code" Binding="{Binding ModuleCode}"/>
                                                 <DataGridTextColumn Header="Required Study Hours" Binding="{Binding  WeeklySelfStudyHours}" />

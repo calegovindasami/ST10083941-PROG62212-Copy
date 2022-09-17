@@ -19,9 +19,7 @@ namespace TimeManagementLibrary
 
         public Context()
         {
-            User = new User("Cassper", 8, DateTime.Today.Date);
-
-            //Temp values
+            User = new User();
             Modules = new ObservableCollection<Module>();
             StudySessions = new ObservableCollection<StudySession>();
 
