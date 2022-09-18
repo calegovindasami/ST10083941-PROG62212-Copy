@@ -47,14 +47,23 @@ namespace ST10083941_PROG6212_POE
                 string moduleCode = ucSessions.cmbModuleCode.Text;
                 var module = Context.SelfStudyHours.FirstOrDefault(s => s.ModuleCode == moduleCode);
                 ucSessions.nudStudyHours.Maximum = module.RemainingWeeklyStudyHours;
+                if (module.RemainingWeeklyStudyHours == 0)
+                {
+                    snackSessionsSuccess.MessageQueue?.Enqueue("Required hours has been completed for this module.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+                    ucSessions.btnAddSession.IsEnabled = false;
+                }
+                else
+                {
+                    ucSessions.btnAddSession.IsEnabled = true;
+                }
             }
         }
 
         private void BtnAddSession_Click(object sender, RoutedEventArgs e)
         {
-            if (ucSessions.dpSessionDate.SelectedDate == null || ucSessions.cmbModuleCode.Text == "")
+            if (ucSessions.dpSessionDate.SelectedDate == null || ucSessions.cmbModuleCode.Text == "" || ucSessions.nudStudyHours.Value == null || ucSessions.nudStudyHours.Value == 0)
             {
-                snackSessions.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+                snackSessions.MessageQueue?.Enqueue("Invalid details.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
             else
             {
