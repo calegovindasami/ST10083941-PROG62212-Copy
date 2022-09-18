@@ -12,6 +12,9 @@ namespace TimeManagementLibrary
     {
         //Variables to hold users data.
         public User User { get; set; }
+
+        //Observable collections already implement the INotifyPropertyChanged interface which
+        //allows the datagrid to be dynamically updated as the values within the collection changes.
         public ObservableCollection<Module> Modules { get; set; }
         public ObservableCollection<StudySession> StudySessions { get; set; }
 
@@ -73,15 +76,26 @@ namespace TimeManagementLibrary
             return weekSelfStudyHours;
         }
 
+        //Signs the user up.
         public void SignUp(string username, int numberOfSemesterWeeks, DateTime semesterStartDate)
         {
             User.Username = username;
             User.NumberOfSemesterWeeks = numberOfSemesterWeeks;
             User.SemesterStartDate = semesterStartDate;
         }
-
+        //Allows user to update their modules.
         public void UpdateModule(Module module,string moduleCode, string moduleName, int numberOfCredits, int weeklyClassHours)
         {
+            //loop goes through StudySessions and changes the module code of the updated module.
+            foreach (StudySession session in StudySessions)
+            {
+                if (session.ModuleCode == module.ModuleCode)
+                {
+                    session.ModuleCode = moduleCode;
+                }
+            }
+
+            //Updates module details.
             foreach (Module mod in Modules)
             {
                 if (mod.ModuleCode == module.ModuleCode)
@@ -94,8 +108,10 @@ namespace TimeManagementLibrary
             }
         }
 
+        //Returns true or false based on whether or not the module code exists within the collection.
         public bool FoundModuleCode(string moduleCode)
         {
+            //Searches the collection to find if the module code exists or not. If it does not, null is returned.
             var foundMod = Modules.FirstOrDefault(m => m.ModuleCode == moduleCode);
             if (foundMod == null)
             {
@@ -104,16 +120,19 @@ namespace TimeManagementLibrary
             return true;
         }
 
+        //Removes module from collection.
         public void RemoveModule(Module module)
         {
             Modules.Remove(module);
         }
 
+        //Assigns the selfstudysession collection corresponding values based on the modules currently entered.
         public void LoadSelfStudySessions()
         {
             SelfStudyHours.Clear();
             foreach (Module mod in Modules)
             {
+                //Calculates the required study time, and the remaining study time for each module and adds it to the corresponding list.
                 double weeklyStudyHours = CalculateWeeklySelfStudyHours(mod.NumberOfCredits, mod.WeeklyClassHours, User.NumberOfSemesterWeeks);
                 double remainingWeeklyStudyHours = CalculateRemainingSelfStudyHours(weeklyStudyHours, mod.ModuleCode);
                 SelfStudyHours selfStudyHours = new SelfStudyHours(mod.ModuleCode, weeklyStudyHours, weeklyStudyHours - remainingWeeklyStudyHours);

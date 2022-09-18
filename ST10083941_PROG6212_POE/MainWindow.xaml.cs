@@ -28,18 +28,24 @@ namespace ST10083941_PROG6212_POE
         {
             InitializeComponent();
             Context = new Context();
+
+            //Adds events for the buttons in the user controls.
             ucUser.btnSubmit.Click += BtnSubmit_Click;
             ucModules.btnAddModule.Click += BtnAddModule_Click;
+            ucSessions.cmbModuleCode.DropDownClosed += CmbModuleCode_DropDownClosed;
+            ucSessions.btnAddSession.Click += BtnAddSession_Click;
+            
+            //Assigns the proper context for current class and corresponding user control class. This allows the DataGrid to be linked to the ObservableCollections.
             DataContext = Context;
             ucSessions.DataContext = Context;
-            ucSessions.btnAddSession.Click += BtnAddSession_Click;
-            ucSessions.cmbModuleCode.DropDownClosed += CmbModuleCode_DropDownClosed;
-            Context.LoadSelfStudySessions();
+
+            //Limits the users semester start date to current year only.
             ucUser.dpSemesterStartDate.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
             ucUser.dpSemesterStartDate.DisplayDateEnd = new DateTime(DateTime.Now.Year, 12, 31);
 
         }
 
+        //Notifies and prevents user from inputting a study session for a module which they have completed its required study time.
         private void CmbModuleCode_DropDownClosed(object sender, EventArgs e)
         {
             if (ucSessions.cmbModuleCode.Text != "")
@@ -47,8 +53,11 @@ namespace ST10083941_PROG6212_POE
                 string moduleCode = ucSessions.cmbModuleCode.Text;
                 var module = Context.SelfStudyHours.FirstOrDefault(s => s.ModuleCode == moduleCode);
                 ucSessions.nudStudyHours.Maximum = module.RemainingWeeklyStudyHours;
+
+                //Prevents user from adding a session for a modules required hours they have completed.
                 if (module.RemainingWeeklyStudyHours == 0)
                 {
+                    //The MessageQueue code below calls a custom controls method which allows a snackbar to be used as a notification tool. This is from the MaterialDesign NuGet package.
                     snackSessionsSuccess.MessageQueue?.Enqueue("Required hours has been completed for this module.", null, null, null, false, true, TimeSpan.FromSeconds(3));
                     ucSessions.btnAddSession.IsEnabled = false;
                 }
@@ -59,8 +68,10 @@ namespace ST10083941_PROG6212_POE
             }
         }
 
+        //Does basic validation and adds a study session to the StudySessions collection located in the "Context.cs" file.
         private void BtnAddSession_Click(object sender, RoutedEventArgs e)
         {
+            //Ensures all fields have correct input.
             if (ucSessions.dpSessionDate.SelectedDate == null || ucSessions.cmbModuleCode.Text == "" || ucSessions.nudStudyHours.Value == null || ucSessions.nudStudyHours.Value == 0)
             {
                 snackSessions.MessageQueue?.Enqueue("Invalid details.", null, null, null, false, true, TimeSpan.FromSeconds(3));
@@ -74,12 +85,14 @@ namespace ST10083941_PROG6212_POE
                 Context.AddStudySession(moduleCode, sessionDate, numberOfHours);
                 Context.LoadSelfStudySessions();
 
+                //Resets input field.
                 ucSessions.cmbModuleCode.SelectedItem = null;
                 ucSessions.dpSessionDate.SelectedDate = null;
                 ucSessions.nudStudyHours.Value = 1;
             }
         }
 
+        //Adds module to the Modules collection and performs basic validation and notifies the user if their input was incorrect.
         private void BtnAddModule_Click(object sender, RoutedEventArgs e)
         {
             string moduleCode = ucModules.ModuleCode;
@@ -92,6 +105,7 @@ namespace ST10083941_PROG6212_POE
             {
                 snackModules.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
+            //Checks if module code already exists.
             else if (!Context.FoundModuleCode(moduleCode))
             {
                 Context.AddModule(moduleCode, moduleName, numberOfCredits, weeklyClassHours);
@@ -104,6 +118,7 @@ namespace ST10083941_PROG6212_POE
             }
         }
 
+        //Signs the user up and moves them to the next page if they have passed the validation.
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             //Prevents user from leaving fields empty.
@@ -115,12 +130,17 @@ namespace ST10083941_PROG6212_POE
             else
             {
                 Context.SignUp(ucUser.Username, ucUser.NumberOfSemesterWeeks, ucUser.SemesterStartDate.Value);
+
+                //This uses the MaterialDesign package which moves the user from the sign up page to the modules page. By using this command, a little animation is done.
                 ucUser.btnSubmit.Command = MaterialDesignThemes.Wpf.Transitions.Transitioner.MoveNextCommand;
+
+                //Only allows user to enter a study session for their current semester.
                 ucSessions.dpSessionDate.DisplayDateStart = Context.User.SemesterStartDate;
                 ucSessions.dpSessionDate.DisplayDateEnd = Context.User.SemesterStartDate.AddDays(Context.User.NumberOfSemesterWeeks * 7);
             }
         }
 
+        //Validates and notifies user if their input is incorrect otherwise it updates the module and study session collection.
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             string moduleCode = ucModules.ModuleCode;
@@ -132,12 +152,9 @@ namespace ST10083941_PROG6212_POE
             {
                 snackModules.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
-            else if (moduleToBeUpdated.ModuleCode != moduleCode)
-            {
-                snackModules.MessageQueue?.Enqueue("Module already exists. Please select the correct module.", null, null, null, false, true, TimeSpan.FromSeconds(3));
-            }
             else if (dgModules.SelectedIndex != -1)
             {
+                //Calls the update method in the Context.cs class.
                 Context.UpdateModule(moduleToBeUpdated, moduleCode, moduleName, numberOfCredits, weeklyClassHours);
                 Context.LoadSelfStudySessions();
                 dgModules.Items.Refresh();
@@ -162,6 +179,7 @@ namespace ST10083941_PROG6212_POE
             }
         }
 
+        //Deletes the selected module, if no module is selected, the user is notified.
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (dgModules.SelectedIndex != -1)
@@ -169,6 +187,7 @@ namespace ST10083941_PROG6212_POE
                 Module module = dgModules.SelectedItem as Module;
                 Context.RemoveModule(module);
                 Context.LoadSelfStudySessions();
+                dgSessions.Items.Refresh();
                 snackModulesSuccess.MessageQueue?.Enqueue("Module has been deleted.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
             else
@@ -176,7 +195,8 @@ namespace ST10083941_PROG6212_POE
                 snackModules.MessageQueue?.Enqueue("Please select a module to delete by clicking on the module code.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
         }
-
+        
+        //Clears the input field for the module form.
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             ucModules.ClearFields();
