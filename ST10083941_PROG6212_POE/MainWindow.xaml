@@ -16,7 +16,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="0">
+        <materialDesign:Transitioner SelectedIndex="1">
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=ExpandIn}">
                 <Grid>
                     <uc:UserSignUp x:Name="ucUser"/>
@@ -32,19 +32,19 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.5}">
                                     <StackPanel>
-                                        <DataGrid  AlternationCount="2" AlternatingRowBackground="LightGray" ItemsSource="{Binding Modules}" MouseDoubleClick="dgModules_MouseDoubleClick" IsReadOnly="True" Width="550" Margin="0 32 0 0" VerticalAlignment="Top" Height="350" Name="dgModules" AutoGenerateColumns="False">
+                                        <DataGrid BorderThickness="0" VerticalGridLinesBrush="LightGray"  HorizontalGridLinesBrush="LightGray" BorderBrush="{StaticResource PrimaryHueLightBrush}" Style="{StaticResource MahApps.Styles.DataGrid}" ItemsSource="{Binding Modules}" MouseDoubleClick="dgModules_MouseDoubleClick" IsReadOnly="True" Width="550" Margin="8 32 0 0" VerticalAlignment="Top" Height="350" Name="dgModules" AutoGenerateColumns="False" GridLinesVisibility="All" HeadersVisibility="Column" FontSize="14">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Binding="{Binding ModuleCode}" Width="110" Header="Module Code"/>
-                                                <DataGridTextColumn Binding="{Binding ModuleName}" Width="160" Header="Module Name"/>
-                                                <DataGridTextColumn Binding="{Binding NumberOfCredits}" Width="80" Header="Credits"/>
-                                                <DataGridTextColumn Binding="{Binding WeeklyClassHours}" Width="120" Header="Weekly Hours"/>
+                                                <DataGridTextColumn Binding="{Binding ModuleCode}" Width="120" Header="Module Code"/>
+                                                <DataGridTextColumn Binding="{Binding ModuleName}"  Width="180" Header="Module Name"/>
+                                                <DataGridTextColumn Binding="{Binding NumberOfCredits}"  Width="100" Header="Credits"/>
+                                                <DataGridTextColumn Binding="{Binding WeeklyClassHours}"   Width="*" Header="Weekly Hours"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                         <StackPanel Orientation="Horizontal">
                                             <Button HorizontalAlignment="Left" Margin="8" Width="150" Name="btnUpdate" Height="50" Click="btnUpdate_Click" FontSize="24" Style="{StaticResource MaterialDesignRaisedAccentButton}" >UPDATE</Button>
                                             <Button HorizontalAlignment="Left" Margin="8" Width="150" Name="btnDelete" Height="50" Click="btnDelete_Click"  FontSize="24" Style="{StaticResource MaterialDesignRaisedAccentButton}" >DELETE</Button>
                                             <Button HorizontalAlignment="Left" Margin="8" Width="150" Name="btnClear" Height="50" Click="btnClear_Click"  FontSize="24" Style="{StaticResource MaterialDesignRaisedAccentButton}" >CLEAR</Button>
-                                            
+
                                         </StackPanel>
                                     </StackPanel>
                                 </materialDesign:TransitioningContent>

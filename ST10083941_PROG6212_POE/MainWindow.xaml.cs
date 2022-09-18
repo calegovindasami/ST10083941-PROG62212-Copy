@@ -154,6 +154,7 @@ namespace ST10083941_PROG6212_POE
             {
                 Module module = dgModules.SelectedItem as Module;
                 Context.RemoveModule(module);
+                Context.LoadSelfStudySessions();
                 snackModulesSuccess.MessageQueue?.Enqueue("Module has been deleted.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
             else
