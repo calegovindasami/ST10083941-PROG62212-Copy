@@ -33,23 +33,28 @@ namespace ST10083941_PROG6212_POE
             DataContext = Context;
             ucSessions.DataContext = Context;
             ucSessions.btnAddSession.Click += BtnAddSession_Click;
-            ucSessions.cmbModuleCode.SelectionChanged += CmbModuleCode_SelectionChanged;
+            ucSessions.cmbModuleCode.DropDownClosed += CmbModuleCode_DropDownClosed;
             Context.LoadSelfStudySessions();
             ucUser.dpSemesterStartDate.DisplayDateStart = new DateTime(DateTime.Now.Year, 1, 1);
             ucUser.dpSemesterStartDate.DisplayDateEnd = new DateTime(DateTime.Now.Year, 12, 31);
 
         }
 
-        private void CmbModuleCode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CmbModuleCode_DropDownClosed(object sender, EventArgs e)
         {
-            string moduleCode = ucSessions.ModuleCode;
+            if (ucSessions.cmbModuleCode.Text != "")
+            {
+                string moduleCode = ucSessions.cmbModuleCode.Text;
+                var module = Context.SelfStudyHours.FirstOrDefault(s => s.ModuleCode == moduleCode);
+                ucSessions.nudStudyHours.Maximum = module.RemainingWeeklyStudyHours;
+            }
         }
 
         private void BtnAddSession_Click(object sender, RoutedEventArgs e)
         {
-            if (ucSessions.dpSessionDate.SelectedDate == null)
+            if (ucSessions.dpSessionDate.SelectedDate == null || ucSessions.cmbModuleCode.Text == "")
             {
-                snackSessions.MessageQueue?.Enqueue("Please pick a date.", null, null, null, false, true, TimeSpan.FromSeconds(3));
+                snackSessions.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
             else
             {
@@ -60,7 +65,7 @@ namespace ST10083941_PROG6212_POE
                 Context.AddStudySession(moduleCode, sessionDate, numberOfHours);
                 Context.LoadSelfStudySessions();
 
-                ucSessions.cmbModuleCode.SelectedIndex = 0;
+                ucSessions.cmbModuleCode.SelectedItem = null;
                 ucSessions.dpSessionDate.SelectedDate = null;
                 ucSessions.nudStudyHours.Value = 1;
             }
