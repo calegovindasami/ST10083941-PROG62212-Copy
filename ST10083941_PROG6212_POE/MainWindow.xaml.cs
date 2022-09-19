@@ -149,6 +149,7 @@ namespace ST10083941_PROG6212_POE
             int numberOfCredits = ucModules.NumberOfCredits;
             int weeklyClassHours = ucModules.WeeklyClassHours;
             var moduleToBeUpdated = dgModules.SelectedItem as Module;
+
             if (moduleCode == "" || moduleName == "")
             {
                 snackModules.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
@@ -185,6 +186,7 @@ namespace ST10083941_PROG6212_POE
         //Deletes the selected module, if no module is selected, the user is notified.
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            //Checks to see if the user has selected a module.
             if (dgModules.SelectedIndex != -1)
             {
                 Module module = dgModules.SelectedItem as Module;
