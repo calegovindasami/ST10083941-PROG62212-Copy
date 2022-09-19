@@ -15,6 +15,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
+        <!--Selected index has to be 0 when running. DO NOT CHANGE THIS-->
+        <!--Some of the controls have not been named since I don't ever need to call or manipulate them-->
         <materialDesign:Transitioner SelectedIndex="0">
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=ExpandIn}">
                 <Grid>
