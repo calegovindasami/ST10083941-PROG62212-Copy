@@ -8,6 +8,7 @@ namespace TimeManagementLibrary.Models
 {
     public class StudySession
     {
+        //Class containing the study session attributes of the user.
         public StudySession(string moduleCode, DateTime sessionDate, int numberOfHours)
         {
             ModuleCode = moduleCode;

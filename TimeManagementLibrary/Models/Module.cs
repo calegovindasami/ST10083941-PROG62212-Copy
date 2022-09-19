@@ -8,6 +8,7 @@ namespace TimeManagementLibrary.Models
 {
     public class Module
     {
+        //Class representing the Module attributes.
         public Module(string moduleCode, string moduleName, int numberOfCredits, int weeklyClassHours)
         {
             ModuleCode = moduleCode;

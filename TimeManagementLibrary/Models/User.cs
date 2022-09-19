@@ -8,6 +8,7 @@ namespace TimeManagementLibrary.Models
 {
     public class User
     {
+        //Class used for holding the Users values.
         public User(string username, int numberOfSemesterWeeks, DateTime semesterStartDate)
         {
             Username = username;

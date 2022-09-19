@@ -119,6 +119,7 @@ namespace TimeManagementLibrary
         public void RemoveModule(Module module)
         {
             Modules.Remove(module);
+            //Has to be converted into a to a List to prevent invalid operation.
             foreach (StudySession session in StudySessions.ToList())
             {
                 if (session.ModuleCode == module.ModuleCode)

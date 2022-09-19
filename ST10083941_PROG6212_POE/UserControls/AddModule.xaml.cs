@@ -21,7 +21,10 @@ namespace ST10083941_PROG6212_POE.UserControls
     /// </summary>
     public partial class AddModule : UserControl
     {
+        //Regex of allowed input characters
         Regex regex = new Regex("[^a-zA-Z0-9]+");
+
+        //Getters and setters for this controls input fields.
         public string ModuleCode
         {
             get => txbModuleCode.Text;
@@ -52,7 +55,7 @@ namespace ST10083941_PROG6212_POE.UserControls
         {
             e.Handled = regex.IsMatch(e.Text);
         }
-
+        //Clears the input fields.
         public void ClearFields()
         {
             txbModuleCode.Text = "";

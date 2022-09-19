@@ -21,6 +21,7 @@ namespace ST10083941_PROG6212_POE.UserControls
     /// </summary>
     public partial class AddStudySession : UserControl
     {
+        //Properties to get the values from the input field.
         public string ModuleCode 
         {
             get => cmbModuleCode.Text;
