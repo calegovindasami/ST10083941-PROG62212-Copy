@@ -10,11 +10,11 @@ namespace TimeManagementLibrary
 {
     public class Context
     {
-        //Variables to hold users data.
+        //Properties to hold users data.
         public User User { get; set; }
 
         //Observable collections already implement the INotifyPropertyChanged interface which
-        //allows the datagrid to be dynamically updated as the values within the collection changes.
+        //allows the datagrid to be dynamically updated as the values within the collection change.
         public ObservableCollection<Module> Modules { get; set; }
         public ObservableCollection<StudySession> StudySessions { get; set; }
 
@@ -23,12 +23,7 @@ namespace TimeManagementLibrary
         public Context()
         {
             User = new User();
-            User.NumberOfSemesterWeeks = 8;
-            Modules = new ObservableCollection<Module>()
-            {
-                new Module("PROG6212", "Programming 2B", 15, 8),
-                new Module("SOEN6222", "Software Engineering", 15, 4)
-            };
+            Modules = new ObservableCollection<Module>();
             StudySessions = new ObservableCollection<StudySession>();
 
             SelfStudyHours = new ObservableCollection<SelfStudyHours>();
@@ -124,6 +119,13 @@ namespace TimeManagementLibrary
         public void RemoveModule(Module module)
         {
             Modules.Remove(module);
+            foreach (StudySession session in StudySessions.ToList())
+            {
+                if (session.ModuleCode == module.ModuleCode)
+                {
+                    StudySessions.Remove(session);
+                }
+            }
         }
 
         //Assigns the selfstudysession collection corresponding values based on the modules currently entered.

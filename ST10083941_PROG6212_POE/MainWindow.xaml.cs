@@ -45,7 +45,7 @@ namespace ST10083941_PROG6212_POE
 
         }
 
-        //Notifies and prevents user from inputting a study session for a module which they have completed its required study time.
+        //Notifies and prevents user from inputting a study session for a module which they have already completed its required study time.
         private void CmbModuleCode_DropDownClosed(object sender, EventArgs e)
         {
             if (ucSessions.cmbModuleCode.Text != "")
@@ -111,6 +111,7 @@ namespace ST10083941_PROG6212_POE
                 Context.AddModule(moduleCode, moduleName, numberOfCredits, weeklyClassHours);
                 snackModulesSuccess.MessageQueue?.Enqueue("Module has been added.", null, null, null, false, true, TimeSpan.FromSeconds(3));
                 Context.LoadSelfStudySessions();
+                ucModules.ClearFields();
             }
             else
             {
@@ -140,7 +141,7 @@ namespace ST10083941_PROG6212_POE
             }
         }
 
-        //Validates and notifies user if their input is incorrect otherwise it updates the module and study session collection.
+        //Validates and notifies user if their input is incorrect otherwise it updates the corresponding collections.
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             string moduleCode = ucModules.ModuleCode;
@@ -148,7 +149,7 @@ namespace ST10083941_PROG6212_POE
             int numberOfCredits = ucModules.NumberOfCredits;
             int weeklyClassHours = ucModules.WeeklyClassHours;
             var moduleToBeUpdated = dgModules.SelectedItem as Module;
-            if (moduleCode == "" && moduleName == "")
+            if (moduleCode == "" || moduleName == "")
             {
                 snackModules.MessageQueue?.Enqueue("Fields cannot be empty.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
@@ -158,6 +159,8 @@ namespace ST10083941_PROG6212_POE
                 Context.UpdateModule(moduleToBeUpdated, moduleCode, moduleName, numberOfCredits, weeklyClassHours);
                 Context.LoadSelfStudySessions();
                 dgModules.Items.Refresh();
+                dgSessions.Items.Refresh();
+                ucSessions.cmbModuleCode.Items.Refresh();
                 snackModulesSuccess.MessageQueue?.Enqueue("Module has been updated.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
             else
@@ -188,6 +191,7 @@ namespace ST10083941_PROG6212_POE
                 Context.RemoveModule(module);
                 Context.LoadSelfStudySessions();
                 dgSessions.Items.Refresh();
+                ucSessions.cmbModuleCode.Items.Refresh();
                 snackModulesSuccess.MessageQueue?.Enqueue("Module has been deleted.", null, null, null, false, true, TimeSpan.FromSeconds(3));
             }
             else

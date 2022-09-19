@@ -15,7 +15,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <materialDesign:Transitioner SelectedIndex="1">
+        <materialDesign:Transitioner SelectedIndex="0">
             <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect Kind=ExpandIn}">
                 <Grid>
                     <uc:UserSignUp x:Name="ucUser"/>
@@ -25,7 +25,7 @@
             </materialDesign:TransitionerSlide>
 
             <materialDesign:TransitionerSlide>
-                <TabControl SelectedIndex="0">
+                <TabControl SelectedIndex="0" Style="{StaticResource MaterialDesignFilledTabControl}" >
                     <TabItem Header="Modules" >
                         <Grid>
                             <StackPanel Orientation="Horizontal">
@@ -40,7 +40,7 @@
                                             </DataGrid.Columns>
                                         </DataGrid>
                                         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button HorizontalAlignment="Left" Margin="12" Width="150" Name="btnUpdate" Height="50" Click="btnUpdate_Click" FontSize="24" Style="{StaticResource MaterialDesignRaisedButton}" >UPDATE</Button>
+                                            <Button ToolTipService.InitialShowDelay="1" ToolTip="Click on module to select it, double click to view its details." HorizontalAlignment="Left" Margin="12" Width="150" Name="btnUpdate" Height="50" Click="btnUpdate_Click" FontSize="24" Style="{StaticResource MaterialDesignRaisedButton}" >UPDATE</Button>
                                             <Button HorizontalAlignment="Left" Margin="12" Width="150" Name="btnDelete" Height="50" Click="btnDelete_Click"  FontSize="24" Style="{StaticResource MaterialDesignRaisedButton}"  >DELETE</Button>
                                             <Button HorizontalAlignment="Left" Margin="12" Width="150" Name="btnClear" Height="50" Click="btnClear_Click"  FontSize="24" Style="{StaticResource MaterialDesignRaisedButton}"  >CLEAR</Button>
 
@@ -72,8 +72,8 @@
                                         <DataGrid BorderThickness="5" BorderBrush="DarkGray" IsReadOnly="True" Margin="16" HorizontalAlignment="Left" Height="200" Width="450" Name="dgStudyHours" AutoGenerateColumns="False" ItemsSource="{Binding SelfStudyHours}" VerticalAlignment="Top"  VerticalGridLinesBrush="LightGray"  HorizontalGridLinesBrush="LightGray" GridLinesVisibility="All">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="Module Code" Width="120" Binding="{Binding ModuleCode}"/>
-                                                <DataGridTextColumn Header="Required Study Hours" Width="160" Binding="{Binding  WeeklySelfStudyHours}" />
-                                                <DataGridTextColumn Header="Remaining Study Hours" Width="*" Binding="{Binding  RemainingWeeklyStudyHours}"/>
+                                                <DataGridTextColumn Header="Required Hours" Width="160" Binding="{Binding  WeeklySelfStudyHours}" />
+                                                <DataGridTextColumn Header="Remaining Hours" Width="*" Binding="{Binding  RemainingWeeklyStudyHours}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </StackPanel>
@@ -87,7 +87,6 @@
 
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Notes"></TabItem>
                 </TabControl>
             </materialDesign:TransitionerSlide>
         </materialDesign:Transitioner>
