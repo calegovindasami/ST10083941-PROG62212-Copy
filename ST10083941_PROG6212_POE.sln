@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST10083941_PROG6212_POE", "ST10083941_PROG6212_POE\ST10083941_PROG6212_POE.csproj", "{513BA51B-0E7C-442A-81D0-CC4DCA2DC980}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST10083941_PROG6212_POE", "ST10083941_PROG6212_POE\ST10083941_PROG6212_POE.csproj", "{513BA51B-0E7C-442A-81D0-CC4DCA2DC980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeManagementLibrary", "TimeManagementLibrary\TimeManagementLibrary.csproj", "{B1EF573E-4329-41DC-9478-776C81DA9DCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeManagementLibrary", "TimeManagementLibrary\TimeManagementLibrary.csproj", "{B1EF573E-4329-41DC-9478-776C81DA9DCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreLibrary", "EFCoreLibrary\EFCoreLibrary.csproj", "{D6E8B7A3-725C-43B2-B362-E9E9C78F485D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B1EF573E-4329-41DC-9478-776C81DA9DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1EF573E-4329-41DC-9478-776C81DA9DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1EF573E-4329-41DC-9478-776C81DA9DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E8B7A3-725C-43B2-B362-E9E9C78F485D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E8B7A3-725C-43B2-B362-E9E9C78F485D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E8B7A3-725C-43B2-B362-E9E9C78F485D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E8B7A3-725C-43B2-B362-E9E9C78F485D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
